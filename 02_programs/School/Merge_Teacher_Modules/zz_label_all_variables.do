@@ -1728,3 +1728,84 @@ cap la var m8sbq6_sequences ""
 cap la var student_age "ECD student age"
 cap la var student_male "Student gender"
 cap la var student_number "Id in fourth_grade_assessment"
+
+
+*------------
+cap la var m7sfq5_pknw__0 "Can teacher 0 add triple digit numbers?"
+cap la var m7sfq5_pknw__1 "Can teacher 1 add triple digit numbers?"
+cap la var m7sfq5_pknw__2 "Can teacher 2 add triple digit numbers?"
+cap la var m7sfq5_pknw__3 "Can teacher 3 add triple digit numbers?"
+cap la var m7sfq5_pknw__4 "Can teacher 4 add triple digit numbers?"
+cap la var m7sfq5_pknw__5 "Can teacher 5 add triple digit numbers?"
+cap la var m7sfq5_pknw__6 "Can teacher 6 add triple digit numbers?"
+cap la var m7sfq5_pknw__7 "Can teacher 7 add triple digit numbers?"
+
+cap la var m7sfq6_pknw__0 "Can teacher 0 multiply double digit numbers?"
+cap la var m7sfq6_pknw__1 "Can teacher 1 multiply double digit numbers?"
+cap la var m7sfq6_pknw__2 "Can teacher 2 multiply double digit numbers?"
+cap la var m7sfq6_pknw__3 "Can teacher 3 multiply double digit numbers?"
+cap la var m7sfq6_pknw__4 "Can teacher 4 multiply double digit numbers?"
+cap la var m7sfq6_pknw__5 "Can teacher 5 multiply double digit numbers?"
+cap la var m7sfq6_pknw__6 "Can teacher 6 multiply double digit numbers?"
+cap la var m7sfq6_pknw__7 "Can teacher 7 multiply double digit numbers?"
+
+cap la var m7sfq7_pknw__0 "Can teacher 0 complete sentences with the correct word?"
+cap la var m7sfq7_pknw__1 "Can teacher 1 complete sentences with the correct word?"
+cap la var m7sfq7_pknw__2 "Can teacher 2 complete sentences with the correct word?"
+cap la var m7sfq7_pknw__3 "Can teacher 3 complete sentences with the correct word?"
+cap la var m7sfq7_pknw__4 "Can teacher 4 complete sentences with the correct word?"
+cap la var m7sfq7_pknw__5 "Can teacher 5 complete sentences with the correct word?"
+cap la var m7sfq7_pknw__6 "Can teacher 6 complete sentences with the correct word?"
+cap la var m7sfq7_pknw__7 "Can teacher 7 complete sentences with the correct word?"
+
+cap la var m7sfq9_pknw__0 "Does teacher 0 have less than 3 years of experience?"
+cap la var m7sfq9_pknw__1 "Does teacher 1 have less than 3 years of experience?"
+cap la var m7sfq9_pknw__2 "Does teacher 2 have less than 3 years of experience?"
+cap la var m7sfq9_pknw__3 "Does teacher 3 have less than 3 years of experience?"
+cap la var m7sfq9_pknw__4 "Does teacher 4 have less than 3 years of experience?"
+cap la var m7sfq9_pknw__5 "Does teacher 5 have less than 3 years of experience?"
+cap la var m7sfq9_pknw__6 "Does teacher 6 have less than 3 years of experience?"
+cap la var m7sfq9_pknw__7 "Does teacher 7 have less than 3 years of experience?"
+
+cap la var boys_num_attending "Number of boys attending"
+cap la var boys_on_list "Number of boys on list"
+cap la var student_attendance_male "Student attendance (male)"
+cap la var student_attendance_female "Student attendance (female)"
+cap la var share_textbook "Textbook shared"
+cap la var share_pencil "Pencil shared"
+cap la var share_exbook "excercise book shared"
+cap la var  textbooks "Textbooks"
+cap la var  used_ict_num "Number of used ICT"
+cap la var  toilet_exists "Toilet exists"
+cap la var  toilet_separate "Toilet separate"
+cap la var  toilet_private "Toilet private"
+cap la var  toilet_usable "Toilet usable"
+cap la var  toilet_handwashing "Toilet (place for handwashing)"
+cap la var  toilet_soap "Toilet (Soap)"
+cap la var  visibility "visibility"
+cap la var  internet "Internet"
+cap la var  infrastructure "Infrastructure"
+
+cap la var  principal_knowledge_avg "Principal knowledge .avg"
+cap la var  school_goals_exist "School goals exist"
+cap la var  school_goals_clear "School goals clear"
+cap la var  school_goals_relevant "School goals relevant"
+cap la var  school_goals_measured "School goals measured"
+cap la var  problem_solving "Problem solving"
+cap la var  standards_monitoring_input "Standards for monitoring inputs"
+cap la var  principal_salary "Principal's salary"
+cap la var  principal_salary_score "Principal's salary score"
+cap la var  principal_trained "Principal trained"
+
+
+                           
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
