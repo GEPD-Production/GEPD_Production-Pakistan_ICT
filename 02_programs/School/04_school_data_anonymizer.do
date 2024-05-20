@@ -29,6 +29,14 @@ gl save_dir "${processed_dir}//School//Anonymized//"
 
 use "${wrk_dir}/school_Stata.dta" 
 
+log using "${save_dir}\sensetive_masked\dropped_vars_log",  name("dropped_vars") replace
+
+di c(filename)
+di c(current_time)
+di c(current_date)
+
+log off dropped_vars
+
 *Checking IDs:
 tab school_code, m				//Typically all schools should have an ID
 
@@ -60,11 +68,13 @@ restore
 }								
 
 
+log on dropped_vars
 loc drop ref_id school_district_preload hashed_school_district _merge tag_dup_final flag_m5_dup_teach_id
 foreach var of local drop{
       capture drop `var'
       di in r "return code for: `var': " _rc
 }
+log off dropped_vars
 
 
 order school_code school_code_preload school_name_preload district_code school_province_preload						
@@ -133,12 +143,13 @@ restore
 }								
 
 
+log on dropped_vars
 loc drop ref_id school_name_preload school_code school_code_preload hashed_school_code _merge
 foreach var of local drop{
       capture drop `var'
       di in r "return code for: `var': " _rc
 }
-
+log off dropped_vars
 
 order school_code_maskd
 
@@ -162,12 +173,20 @@ restore
 }	
 
 
-cap drop m1s0q9__Latitude m1s0q9__Longitude m1s0q9__Accuracy m1s0q9__Altitude m1s0q9__Timestamp m1s0q9__Longitude m1s0q9__Latitude
+log on dropped_vars
+loc drop m1s0q9__Latitude m1s0q9__Longitude m1s0q9__Accuracy m1s0q9__Altitude m1s0q9_Altitude  m1s0q9__Timestamp m1s0q9_Timestamp m1s0q9_Longitude m1s0q9_Latitude m1s0q9_Accuracy
+foreach var of local drop{
+      capture drop `var'
+      di in r "return code for: `var': " _rc
+}
+log off dropped_vars
 
 *--- School land line number and principal mobile number
 br m1saq2 m1saq2b
 
+log on dropped_vars
 drop m1saq2 m1saq2b
+log off dropped_vars
 
 *--- School enrollement 
 
@@ -190,6 +209,14 @@ foreach var of local drop{
       capture drop `var'
       di in r "return code for: `var': " _rc
 }
+
+log on dropped_vars
+loc drop total_enrolled m1saq7 m1saq8
+foreach var of local drop{
+      capture drop `var'
+      di in r "return code for: `var': " _rc
+}
+log off dropped_vars
 
 
 *--- Total number of 5th grade enrollments 
@@ -216,7 +243,9 @@ drop m1saq8a_etri */
 *--- name of principals and other var names (to be dropped)
 br  m1saq1_first m1saq1_last m1s0q2_name m1s0q1_name m1s0q1_name_other name1 name2 name3 name4 name5 m6_teacher_name m8_teacher_name
 
+log on dropped_vars
 drop  m1saq1_first m1saq1_last m1s0q2_name m1s0q1_name m1s0q1_name_other name1 name2 name3 name4 name5 m6_teacher_name m8_teacher_name
+log off dropped_vars
 
 *--- Position in school (recoding low frequency obs if needed)
 tab m7saq1
@@ -225,11 +254,15 @@ tab m1saq3
 *tab m7saq1, nolabel
 *	replace m7saq1 =97 if m7saq1== 6 
 
+log on dropped_vars
 drop m1saq3
+log off dropped_vars
 
 *--- Position in school_other (drop var)
 tab m7saq1_other
+log on dropped_vars
 drop m7saq1_other
+log off dropped_vars
 
 *--- Year started position teaching (turn dates into years, then interval recoding)
 tab m7saq8
@@ -249,7 +282,9 @@ recode m7saq8_y (12.01/max=13 "more than 12 years")(.=.), gen (m7saq8_c)
 
 		tab m7saq8_c, m
 
+log on dropped_vars
 drop m7saq8_y m7saq8
+log off dropped_vars
 
 *--- Age (Two steps control)-- this shall be investigated on a case by case basis (depending on each dataset)
 tab m7saq9, m
@@ -272,15 +307,21 @@ recode m7saq9 (0/41=41 " 41 years old and less")(60/max=60 "more than 59 years")
 	label var m7saq9_c "What is your age?"
 	
 
+log on dropped_vars
 drop m7saq9
+log off	dropped_vars
 							
 *--- Education_other (drop var)
 tab m7saq7_other
+log on dropped_vars
 drop m7saq7_other
+log off dropped_vars
 
 *--- gender (drop var)
 tab m7saq10
+log on dropped_vars
 drop m7saq10
+log off dropped_vars
 
 *--- Salary variable (top/bottom recoding)
 tab m7shq2_satt
@@ -295,7 +336,7 @@ recode m7shq2_satt (0/80000=80000 "80000 and less") (200000/max=200000 "200000 a
 	
 	label var m7shq2_satt_c "What is your net monthly salary as a public-school principal?"
 	
-
+log on dropped_vars
 drop m7shq2_satt
 
 *------------------------------------------------------------------------------*
@@ -330,24 +371,35 @@ teacher_phone_number1 teacher_phone_number2 teacher_phone_number3 teacher_phone_
 teacher_phone_number5 m1s0q6 m1saq2 m1saq2b fillout_teacher_q fillout_teacher_con ///
 fillout_teacher_obs observation_id sssys_irnd has__errors interview__status teacher_etri_list_photo ///
 m5s2q1c_number_new m5s2q1e_number_new m5s1q1f_grammer_new monitoring_inputs_temp monitoring_infrastructure_temp ///
-principal_training_temp school_teacher_ques_INPT
+principal_training_temp school_teacher_ques_INPT modules__2 modules__1 modules__7 modules__3 modules__5 modules__6 modules__4 modules__8 ///
+m2saq1 numEligible i1 i2 i3 i4 i5 available1 available2 available3 available4 available5 ///
+teacher_phone_number1 teacher_phone_number2 teacher_phone_number3 teacher_phone_number4 ///
+teacher_phone_number5 m1s0q6 m1saq2 m1saq2b fillout_teacher_q fillout_teacher_con ///
+fillout_teacher_obs observation_id sssys_irnd has__errors interview__status teacher_etri_list_photo ///
+m5s2q1c_number_new m5s2q1e_number_new m5s1q1f_grammer_new monitoring_inputs_temp monitoring_infrastructure_temp ///
+principal_training_temp school_teacher_ques_INPT ///
+coed_toilet pknw_actual_cont pknw_actual_exper school_goals_relevant_total principal_eval_tot tag_dup
 
 foreach var of local drop{
       capture drop `var'
       di in r "return code for: `var': " _rc
 }
 
+log off dropped_vars
 
 
 do "${clone}/02_programs/School/labels.do"
 do "${clone}/02_programs/School/Merge_Teacher_Modules/zz_label_all_variables.do"
+do "${clone}/02_programs/School/Merge_Teacher_Modules/z_value_labels.do"
 
 label var district_code "Masked district code"
 label var school_code_maskd"Masked school code"
 
 order school_code_maskd district_code school_province_preload total_enrolled_c numEligible4th   m1* m4* subject_test s1* s2*  m5* m6* m7* m8*
 
+sort school_code_maskd 
 
+log on dropped_vars
 *--- dropping vars with all missing (no obs)
 
 foreach var of varlist * {
@@ -360,7 +412,8 @@ foreach var of varlist * {
     capture assert missing(`var')
     if !_rc drop `var'
 }
-
+log off dropped_vars 
+log close dropped_vars
 
 
 *------------------------------------------------------------------------------*
@@ -370,12 +423,55 @@ save "${save_dir}\school.dta", replace
 
 	clear
 
+*------------------------------------------------------------------------------*
+*Comparing anonymized & confidential school datasets:
+*-------------------------------------
+log using "${save_dir}\sensetive_masked\QA_anonymization",  name("QA_anonymization") replace
+
+use "${wrk_dir}/school_Stata.dta" 
+
+di c(filename)
+di c(current_time)
+di c(current_date)
+
+*------------------------------------------------------------------------------*
+* Quality control the anonymized dataset by comparing it to confidential set 
+*  Note----: 
+*		[if the follwoing code returns no error -- then the values and variables of the two datsets are identical]
+*		[if the follwoing code returns error code "r(9)" -- then some/all values and variables of two datsets are different]
+
+* Master dataset = [confidential]
+* using  dataset = [anonymized]
+
+* This test compares the individual values of the varibales 
+* There are 4 possible test outcomes: 
+/*
+	a- [Match]: means varibales' values are identical 
+	b- [Doesnt exist in using]: means var was dropped in anonymized set
+	c- [# mistamtches in using]: varibales' values of two data are changed (# values/obs)
+	d- [formate in master vs. formate in using]: varibales formatting has changed (e.g. int - str)
+*/
+*-------------------------------------
+sort school_code
+capture noisily cf _all using "${save_dir}\school.dta", all verbose
+
+log off QA_anonymization
+log close QA_anonymization
+	clear
 	
 ********************************************************************************
 * ************* 2- Teachers data *********
 ********************************************************************************	
 
 use "${wrk_dir}/teachers_Stata.dta" 
+
+log using "${save_dir}\sensetive_masked\dropped_vars_log",  name("dropped_vars") append
+
+di c(filename)
+di c(current_time)
+di c(current_date)
+
+log off dropped_vars
 
 
 *Checking IDs:
@@ -407,7 +503,11 @@ foreach var of local drop{
 }
 
 
-order hashed_school_code hashed_school_province hashed_school_district school_code school_name_preload district_code
+local order hashed_school_code hashed_school_province hashed_school_district school_code school_name_preload district_code
+foreach var of local order{
+      capture order `var'
+      di in r "return code for: `var': " _rc
+}
 
 *------------------------------------------------------------------------------*
 *Addressing Strata varibale (adding the masked variblae extracted previously from the school file):
@@ -439,31 +539,51 @@ tab _merge
 								//Checking the quality of the merge -- clean and error free merge							
 
 
+log on dropped_vars 
 local drop school_code school_code_preload hashed_school_code _merge school_name_preload
 foreach var of local drop{
       capture drop `var'
       di in r "return code for: `var': " _rc
 }
+log off dropped_vars 
 
-order hashed_school_province district_code school_code_maskd
+local order hashed_school_province district_code school_code_maskd
+foreach var of local order{
+      capture order `var'
+      di in r "return code for: `var': " _rc
+}
 
 *--- School geospatial data
-cap drop lat lon 
+log on dropped_vars 
+loc drop m1s0q9__Latitude m1s0q9__Longitude m1s0q9__Accuracy m1s0q9__Altitude m1s0q9_Altitude  m1s0q9__Timestamp m1s0q9_Timestamp m1s0q9_Longitude m1s0q9_Latitude m1s0q9_Accuracy lat lon latitude longitude
+foreach var of local drop{
+      capture drop `var'
+      di in r "return code for: `var': " _rc
+}
+log off dropped_vars 
 
 
 *--- School enrollement (dropping it since already addressed in the school file)
 
-cap drop total_enrolled
+log on dropped_vars 
+loc drop total_enrolled
+foreach var of local drop{
+      capture drop `var'
+      di in r "return code for: `var': " _rc
+}
+log off dropped_vars 
 
 *------------------------------------------------------------------------------*
 *Addressing teachers:
 *--------------------------------------------
 *--- Teacher name (to be dropped)
+log on dropped_vars 
 local drop m2saq2 teacher_name_x m4saq1 teacher_name_y m5sb_troster teacher_name m3sb_troster  
 foreach var of local drop{
       capture drop `var'
       di in r "return code for: `var': " _rc
 }
+log off dropped_vars 
 
 *--- Position in school (recoding low frequency obs if needed)
 tab m2saq4
@@ -472,10 +592,14 @@ replace m2saq4 =97 if m2saq4== 6
 replace m2saq4 =97 if m2saq4== 5
 
 *--- Position in school_other (drop var)
+log on dropped_vars 
 drop m2saq4_other
+log off dropped_vars 
 
 *--- Contract status_other (drop var)
+log on dropped_vars 
 drop m2saq5_other
+log off dropped_vars 
 
 *--- Age (Two steps control)-- this shall be investigated on a case by case basis (depending on each dataset)
 tab m3saq6, m			
@@ -494,11 +618,15 @@ recode m3saq6 (0/30=28 " 30 years old and less")(56/max=56 "more than 55 years")
 
 	label var m3saq6_c "What is your age?"
 	
+log on dropped_vars 
 drop m3saq6
+log off dropped_vars 
 
 *--- Education_other (drop var)
 tab m3saq4_other
+log on dropped_vars 
 drop m3saq4_other
+log off dropped_vars 
 
 *--- Salary delay (recoding)
 tab m3seq7_tatt
@@ -507,7 +635,10 @@ sum m3seq7_tatt, d
 recode m3seq7_tatt (8/max=8 "from 8 to 12 months")(.=.), gen (m3seq7_tatt_c)
 	label var m3seq7_tatt_c "How many months was your salary delayed in the last academic year"
 	tab m3seq7_tatt_c
+	
+log on dropped_vars 
 drop m3seq7_tatt
+log off dropped_vars 
 
 *--- Year starting teaching (turn dates into years, then interval recoding)
 tab m3saq5
@@ -526,11 +657,14 @@ recode m3saq5_y (32/max=32 "more than 31 years")(.=.), gen (m3saq5_c)
 
 		tab m3saq5_c
 
+log on dropped_vars 
 drop m3saq5_y m3saq5
+log off dropped_vars 
 
 *------------------------------------------------------------------------------*
 *--- dropping unnecessary vars
 *--------------------------------------
+log on dropped_vars 
 loc drop hashed_school_code hashed_school_province hashed_school_district ///
 m1s0q2_name m1s0q2_code m1s0q2_emis school_info_correct school_emis_preload ///
 school_address_preload school_code_preload school_name survey_time m7saq10 ///
@@ -540,12 +674,18 @@ m3sbq10_other_tmna m3sdq5_tsup_other m3sdq12_other_tsup m3sdq17_other_ildr ///
 m3sdq18_other_ildr m3sdq25_other_ildr m3seq5_other_tatt m3seq8_other_tsdp ///
 unique_teach_id teacher_unique_id iden district interview__key interview__id school tehsil shift schoollevel strata ///
 uc_name village_city_name vill_neighbour_council_name pk_no na_no building_owner_ship location location head_master_name ///
-district_2
+district_2 ///
+emis_code xcoordinate ycoordinate total_enrollment school_headmaster_contact_no ///
+nstudents_district total_district share_district /// 
+sample_size totalstudents strata_count strata_size strata_school_prob strata_prob index tag ///
+flag_unmatched tag_v2 flag_mismatch school_collapse_temp
+
 
 foreach var of local drop{
       capture drop `var'
       di in r "return code for: `var': " _rc
 }
+log off dropped_vars
 
 
 do "${clone}/02_programs/School/Merge_Teacher_Modules/z_value_labels.do"
@@ -553,13 +693,13 @@ do "${clone}/02_programs/School/Merge_Teacher_Modules/zz_label_all_variables.do"
 do "${clone}/02_programs/School/labels.do"
 
 
-order district_code school_code_maskd	teachers_id
+order district_code school_code_maskd teachers_id
+sort school_code_maskd teachers_id
 
 label var district_code "Masked district code"
 label var school_code_maskd"Masked school code"
 
-
-
+log on dropped_vars
 *--- dropping vars with all missing (no obs)
 
 foreach var of varlist * {
@@ -572,8 +712,8 @@ foreach var of varlist * {
     capture assert missing(`var')
     if !_rc drop `var'
 }
-
-
+log off dropped_vars
+log close dropped_vars
 
 
 *------------------------------------------------------------------------------*
@@ -581,6 +721,42 @@ foreach var of varlist * {
 *-------------------------------------
 save "${save_dir}\teachers.dta", replace 
 
+	clear
+
+	*------------------------------------------------------------------------------*
+*Comparing anonymized & confidential teachers datasets:
+*-------------------------------------
+log using "${save_dir}\sensetive_masked\QA_anonymization",  name("QA_anonymization") append
+
+use "${wrk_dir}/teachers_Stata.dta" 
+
+di c(filename)
+di c(current_time)
+di c(current_date)
+
+*------------------------------------------------------------------------------*
+* Quality control the anonymized dataset by comparing it to confidential set 
+*  Note----: 
+*		[if the follwoing code returns no error -- then the values and variables of the two datsets are identical]
+*		[if the follwoing code returns error code "r(9)" -- then some/all values and variables of two datsets are different]
+
+* Master dataset = [confidential]
+* using  dataset = [anonymized]
+
+* This test compares the individual values of the varibales 
+* There are 4 possible test outcomes: 
+/*
+	a- [Match]: means varibales' values are identical 
+	b- [Doesnt exist in using]: means var was dropped in anonymized set
+	c- [# mistamtches in using]: varibales' values of two data are changed (# values/obs)
+	d- [formate in master vs. formate in using]: varibales formatting has changed (e.g. int - str)
+*/
+*-------------------------------------
+sort school_code teachers_id
+capture noisily cf _all using "${save_dir}\teachers.dta", all verbose
+
+log off QA_anonymization
+log close QA_anonymization
 	clear
 
 
@@ -593,6 +769,13 @@ save "${save_dir}\teachers.dta", replace
 *------------------------------------------------------------------------------*
 use "${wrk_dir}/first_grade_stata.dta" 
 
+log using "${save_dir}\sensetive_masked\dropped_vars_log",  name("dropped_vars") append
+
+di c(filename)
+di c(current_time)
+di c(current_date)
+
+log off dropped_vars
 
 *Checking IDs:
 tab school_code, m						//Typically all schools should have an ID
@@ -631,26 +814,96 @@ tab _merge, nolab
 br strata strata_code	
 
 	label var strata_code "Strata (urban/rural/boys/girls/coedu)"
-
+	
+log on dropped_vars
 *Dropping un necessary varibales 
-loc drop school_code school_name_preload m6s1q1 interview__id interview__key school district tehsil shift schoollevel strata location
+loc drop school_code school_name_preload m6s1q1 interview__id interview__key school district tehsil shift schoollevel strata location senatorialdistrict classification ///
+g1_assess_count g1_student_weight_temp 
 foreach var of local drop{
       capture drop `var'
       di in r "return code for: `var': " _rc
 }
+log off dropped_vars
 
-order school_code_maskd
+
+do "${clone}/02_programs/School/Merge_Teacher_Modules/z_value_labels.do"
+do "${clone}/02_programs/School/Merge_Teacher_Modules/zz_label_all_variables.do"
+do "${clone}/02_programs/School/labels.do"
+
+order school_code_maskd ecd_assessment__id
+sort school_code_maskd ecd_assessment__id
+
+log on dropped_vars
+*--- dropping vars with all missing (no obs)
+
+foreach var of varlist * {
+    capture assert missing(`var')
+    if !_rc codebook `var', compact
+}
+
+
+foreach var of varlist * {
+    capture assert missing(`var')
+    if !_rc drop `var'
+}
+log off dropped_vars
+log close dropped_vars
 
 * Saving anonymized g1 dataset 
 save "${save_dir}\first_grade_assessment.dta", replace
 
 	clear
 
+*------------------------------------------------------------------------------*
+*Comparing anonymized & confidential 1st grade datasets:
+*-------------------------------------
+log using "${save_dir}\sensetive_masked\QA_anonymization",  name("QA_anonymization") append
+
+use "${wrk_dir}/first_grade_Stata.dta" 
+
+di c(filename)
+di c(current_time)
+di c(current_date)
+
+*------------------------------------------------------------------------------*
+* Quality control the anonymized dataset by comparing it to confidential set 
+*  Note----: 
+*		[if the follwoing code returns no error -- then the values and variables of the two datsets are identical]
+*		[if the follwoing code returns error code "r(9)" -- then some/all values and variables of two datsets are different]
+
+* Master dataset = [confidential]
+* using  dataset = [anonymized]
+
+* This test compares the individual values of the varibales 
+* There are 4 possible test outcomes: 
+/*
+	a- [Match]: means varibales' values are identical 
+	b- [Doesnt exist in using]: means var was dropped in anonymized set
+	c- [# mistamtches in using]: varibales' values of two data are changed (# values/obs)
+	d- [formate in master vs. formate in using]: varibales formatting has changed (e.g. int - str)
+*/
+*-------------------------------------
+sort school_code  ecd_assessment__id
+
+capture noisily cf _all using "${save_dir}\first_grade_assessment.dta", all verbose
+
+log off QA_anonymization
+log close QA_anonymization
+	clear
+
+
 *------------------------------------------------------------------------------*	
 *For fourth grade students
 *------------------------------------------------------------------------------*
 use "${wrk_dir}/fourth_grade_stata.dta" 
 
+log using "${save_dir}\sensetive_masked\dropped_vars_log",  name("dropped_vars") append
+
+di c(filename)
+di c(current_time)
+di c(current_date)
+
+log off dropped_vars
 
 
 *Checking IDs:
@@ -688,13 +941,40 @@ br strata strata_code
 
 	label var strata_code "Strata (urban/rural/boys/girls/coedu)"							
 								
-								
+log on dropped_vars								
 *Dropping un necessary varibales 
-loc drop school_code school_name_preload _merge m8s1q1 interview__id interview__key school interview__id interview__key school district tehsil shift schoollevel strata location
+loc drop school_code school_name_preload _merge m8s1q1 interview__id interview__key school interview__id interview__key school district tehsil shift schoollevel strata location senatorialdistrict classification ///
+g4_stud_count g4_assess_count g4_student_weight_temp 
 foreach var of local drop{
       capture drop `var'
       di in r "return code for: `var': " _rc
 }
+log  off dropped_vars
+
+do "${clone}/02_programs/School/Merge_Teacher_Modules/z_value_labels.do"
+do "${clone}/02_programs/School/Merge_Teacher_Modules/zz_label_all_variables.do"
+do "${clone}/02_programs/School/labels.do"
+
+
+order school_code_maskd fourth_grade_assessment__id
+sort school_code_maskd fourth_grade_assessment__id
+
+
+log on dropped_vars
+*--- dropping vars with all missing (no obs)
+
+foreach var of varlist * {
+    capture assert missing(`var')
+    if !_rc codebook `var', compact
+}
+
+
+foreach var of varlist * {
+    capture assert missing(`var')
+    if !_rc drop `var'
+}
+log off dropped_vars
+log close dropped_vars
 
 order school_code_maskd
 
@@ -703,5 +983,45 @@ save "${save_dir}\fourth_grade_assessment.dta", replace
 
 	clear
 	
+*------------------------------------------------------------------------------*
+*Comparing anonymized & confidential 4th grade datasets:
+*-------------------------------------
+log using "${save_dir}\sensetive_masked\QA_anonymization",  name("QA_anonymization") append
+
+use "${wrk_dir}/fourth_grade_Stata.dta" 
+
+di c(filename)
+di c(current_time)
+di c(current_date)
+
+*------------------------------------------------------------------------------*
+* Quality control the anonymized dataset by comparing it to confidential set 
+*  Note----: 
+*		[if the follwoing code returns no error -- then the values and variables of the two datsets are identical]
+*		[if the follwoing code returns error code "r(9)" -- then some/all values and variables of two datsets are different]
+
+* Master dataset = [confidential]
+* using  dataset = [anonymized]
+
+* This test compares the individual values of the varibales 
+* There are 4 possible test outcomes: 
+/*
+	a- [Match]: means varibales' values are identical 
+	b- [Doesnt exist in using]: means var was dropped in anonymized set
+	c- [# mistamtches in using]: varibales' values of two data are changed (# values/obs)
+	d- [formate in master vs. formate in using]: varibales formatting has changed (e.g. int - str)
+	
+*/
+*-------------------------------------
+sort school_code fourth_grade_assessment__id
+
+capture noisily cf _all using "${save_dir}\fourth_grade_assessment.dta", all verbose
+
+log off QA_anonymization
+log close QA_anonymization
+	clear
+		clear all 
+	
+
 	
 
