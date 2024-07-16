@@ -910,7 +910,7 @@ indicators <- list(
   # (De Facto) Pe,rcent of teachers that performance matters for promotions
   c("SE.PRM.TATT.6 ", "100*better_teachers_promoted		", "teacher_questionnaire", "TATT", "All"),
   # (De Jure) Is ,there a well-established career path for teachers?
-  # SE.PRM.TATT.7,  -999     ,
+  # SE.PRM.TATT.7,  as.numeric(NA)     ,
   # (De Facto) Pe,rcent of teachers that report salary delays in the past 12 months
   c("SE.PRM.TATT.8 ", "100*m3seq6_tatt		", "teacher_questionnaire", "TATT", "All"),
   # (De Facto) Po,licy Lever (Teaching) - Attraction
@@ -927,7 +927,7 @@ indicators <- list(
   # Policy Lever (,Teaching) - Selection & Deployment
   c("SE.PRM.TSDP.1", "criteria_admittance", "policy_survey", "NA", "NA"),
   # (De Jure) Requ,irements to enter into initial education programs
-  c("SE.PRM.TSDP.2", "-999", "policy_survey", "NA", "NA"),
+  c("SE.PRM.TSDP.2", "as.numeric(NA)", "policy_survey", "NA", "NA"),
   # (De Facto) Ave,rage quality of applicants accepted into initial education programs
   c("SE.PRM.TSDP.3", "criteria_become", "policy_survey", "NA", "NA"),
   # (De Jure) Requ,irements to become a primary school teacher
@@ -937,7 +937,7 @@ indicators <- list(
   # (De Jure) Requ,irements to fulfill a transfer request
   c("SE.PRM.TSDP.6  ", "1+2*teacher_deployment		", "teacher_questionnaire", "TSDP", "All"),
   # (De Facto) Req,uirements to fulfill a transfer request
-  c("SE.PRM.TSDP.7", "-999", "policy_survey", "NA", "NA"),
+  c("SE.PRM.TSDP.7", "as.numeric(NA)", "policy_survey", "NA", "NA"),
   # (De Jure) Sele,ctivity of teacher hiring process
   c("SE.PRM.TSDP.DF ", "teacher_selection_deployment		", "teacher_questionnaire", "TSDP", "All"),
   # (De Facto) Pol,icy Lever (Teaching) - Selection & Deployment
@@ -1038,7 +1038,7 @@ indicators <- list(
   c("SE.PRM.ISTD.14 ", " 100*m1scq14_imon__3		", "school", "ISTD", "All"), # (De Facto) Do you know if there is there a policy in place to require that schools are accessible to children with speci~
   c("SE.PRM.ISTD.2  ", " 100*m1scq13_imon__2		", "school", "ISTD", "All"), # (De Facto) Do you know if there is a policy in place to require that students have access to the prescribed textbooks?
   c("SE.PRM.ISTD.3", "connectivity_program", "policy_survey", "NA", "NA"), # (De Jure) Is there a national connectivity program?
-  c("SE.PRM.ISTD.4", "-999", "policy_survey", "NA", "NA"), # (De Facto) Do you know if there is a national connectivity program?
+  c("SE.PRM.ISTD.4", "as.numeric(NA)", "policy_survey", "NA", "NA"), # (De Facto) Do you know if there is a national connectivity program?
   c("SE.PRM.ISTD.5", "materials_policy", "policy_survey", "NA", "NA"), # (De Jure) Is there a policy in place to require that students have access to PCs, laptops, tablets, and/or other computi~
   c("SE.PRM.ISTD.6  ", " 100*m1scq13_imon__5		", "school", "ISTD", "All"), # (De Facto) Do you know if there is a policy in place to require that students have access to PCs, laptops, tablets, and/~
   c("SE.PRM.ISTD.7", "electricity_policy", "policy_survey", "NA", "NA"), # (De Jure) Is there a policy in place to require that schools have access to electricity?
@@ -1054,17 +1054,17 @@ indicators <- list(
 
   c("SE.PRM.IMON    ", " sch_monitoring		", "school", "IMON", "All"), # Policy Lever (Inputs & Infrastructure) - Monitoring
   c("SE.PRM.IMON.1  ", " 100*m1scq1_imon		", "school", "IMON", "All"), # (De Facto) Percent of schools that report there is someone monitoring that basic inputs are available to students
-  c("SE.PRM.IMON.10", "-999", "policy_survey", "NA", "NA"), # (De Jure) Number of basic infrastructure features clearly articulated as needing to be monitored
+  c("SE.PRM.IMON.10", "as.numeric(NA)", "policy_survey", "NA", "NA"), # (De Jure) Number of basic infrastructure features clearly articulated as needing to be monitored
   c("SE.PRM.IMON.2  ", " 100*parents_involved		", "school", "IMON", "All"), # (De Facto) Percent of schools that report that parents or community members are involved in the monitoring of availabili~
   c("SE.PRM.IMON.3  ", " 100*m1scq5_imon		", "school", "IMON", "All"), # (De Facto) Percent of schools that report that there is an inventory to monitor availability of basic inputs
   c("SE.PRM.IMON.4  ", " 100*m1scq7_imon		", "school", "IMON", "All"), # (De Facto) Percent of schools that report there is someone monitoring that basic infrastructure is available
   c("SE.PRM.IMON.5  ", " 100*bin_var(m1scq10_imon,1)		", "school", "IMON", "All"), # (De Facto) Percent of schools that report that parents or community members are involved in the monitoring of availabili~
   c("SE.PRM.IMON.6  ", " 100*m1scq11_imon		", "school", "IMON", "All"), # (De Facto) Percent of schools that report that there is an inventory to monitor availability of basic infrastructure
-  c("SE.PRM.IMON.7", "-999", "policy_survey", "NA", "NA"), # (De Jure) Is the responsibility of monitoring basic inputs clearly articulated in the policies?
-  c("SE.PRM.IMON.8", "-999", "policy_survey", "NA", "NA"), # (De Jure) Number of basic inputs clearly articulated as needing to be monitored
-  c("SE.PRM.IMON.9", "-999", "policy_survey", "NA", "NA"), # (De Jure) Is the responsibility of monitoring basic infrastructure clearly articulated in the policies?
+  c("SE.PRM.IMON.7", "as.numeric(NA)", "policy_survey", "NA", "NA"), # (De Jure) Is the responsibility of monitoring basic inputs clearly articulated in the policies?
+  c("SE.PRM.IMON.8", "as.numeric(NA)", "policy_survey", "NA", "NA"), # (De Jure) Number of basic inputs clearly articulated as needing to be monitored
+  c("SE.PRM.IMON.9", "as.numeric(NA)", "policy_survey", "NA", "NA"), # (De Jure) Is the responsibility of monitoring basic infrastructure clearly articulated in the policies?
   c("SE.PRM.IMON.DF ", " sch_monitoring		", "school", "IMON", "All"), # (De Facto) Policy Lever (Inputs & Infrastructure) - Monitoring
-  c("SE.PRM.IMON.DJ", "-999", "policy_survey", "NA", "NA"), # (De Jure) Policy Lever (Inputs & Infrastructure) - Monitoring
+  c("SE.PRM.IMON.DJ", "as.numeric(NA)", "policy_survey", "NA", "NA"), # (De Jure) Policy Lever (Inputs & Infrastructure) - Monitoring
 
 
 
@@ -1080,7 +1080,7 @@ indicators <- list(
   c("SE.PRM.LNTN.6", "100*as.numeric(`Percentage of children born in the five (three) years preceding the survey who were ever breastfed`)", "learners", "NA", "NA"), # (De Facto) Percent of children born in the five (three) years preceding the survey who were ever breastfed
   c("SE.PRM.LNTN.7", "school_feeding", "policy_survey", "NA", "NA"), # (De Jure) Is there a publicly funded school feeding program?
   c("SE.PRM.LNTN.8", "100*m1saq9_lnut", "school", "school_dta_anon", "All"), # (De Facto) Percent of schools reporting having publicly funded school feeding program
-  c("SE.PRM.LNTN.DF", "4*(SE.PRM.LNTN.2+SE.PRM.LNTN.4+SE.PRM.LNTN.6 +SE.PRM.LNTN.8)/400+1", "aggregate", 'c("SE.PRM.LNTN.2", "SE.PRM.LNTN.4", "SE.PRM.LNTN.6", "SE.PRM.LNTN.8")', "NA"), # (De Facto) Policy Lever (Learners) - Nutrition Programs
+  c("SE.PRM.LNTN.DF", "4*rowMeans(across(c('SE.PRM.LNTN.2', 'SE.PRM.LNTN.4', 'SE.PRM.LNTN.6', 'SE.PRM.LNTN.8')),na.rm = TRUE)/100+1", "aggregate", 'c("SE.PRM.LNTN.2", "SE.PRM.LNTN.4", "SE.PRM.LNTN.6", "SE.PRM.LNTN.8")', "NA"), # (De Facto) Policy Lever (Learners) - Nutrition Programs
   c("SE.PRM.LNTN.DJ", "nutrition_programs", "policy_survey", "NA", "NA"), # (De Jure) Policy Lever (Learners) - Nutrition Programs
   c("SE.PRM.LNTN", "SE.PRM.LNTN.DF", "aggregate", 'c("SE.PRM.LNTN.DF")', "NA"), # Policy Lever (Learners) - Nutrition Programs
 
@@ -1096,7 +1096,7 @@ indicators <- list(
   c("SE.PRM.LHTH.6", "100*as.numeric(`MICS/Other - Percentage of children age 6-59 months who received deworming medication.`)", "learners", "NA", "NA"), # (De Facto) Percent of children age 6-59 months who received deworming medication
   c("SE.PRM.LHTH.7", "antenatal_skilled_delivery", "policy_survey", "NA", "NA"), # (De Jure) Is there a policy that guarantees pregnant women free antenatal visits and skilled delivery?
   c("SE.PRM.LHTH.8", "100*as.numeric(`MICS/DHS - Percentage of women age 15-49 years with a live birth in the last 2 years whose most recent live birth was delivered in a health facility`)", "learners", "NA", "NA"), # (De Facto) Percent of women age 15-49 years with a live birth in the last 2 years whose most recent live birth was deliv~
-  c("SE.PRM.LHTH.DF", "4*(SE.PRM.LHTH.2+SE.PRM.LHTH.3+ SE.PRM.LHTH.8)/300+1", "aggregate", 'c("SE.PRM.LHTH.2", "SE.PRM.LHTH.3", "SE.PRM.LHTH.8")', "NA"), # (De Facto) Policy Lever (Learners) - Health
+  c("SE.PRM.LHTH.DF", "4*rowMeans(across(c('SE.PRM.LHTH.2', 'SE.PRM.LHTH.4', 'SE.PRM.LHTH.6', 'SE.PRM.LHTH.8')),na.rm = TRUE)/100+1", "aggregate", 'c("SE.PRM.LHTH.2", "SE.PRM.LHTH.4", "SE.PRM.LHTH.6", "SE.PRM.LHTH.8")', "NA"), # (De Facto) Policy Lever (Learners) - Health
   c("SE.PRM.LHTH.DJ", "health_programs", "policy_survey", "NA", "NA"), # (De Jure) Policy Lever (Learners) - Health
   c("SE.PRM.LHTH", "SE.PRM.LHTH.DF", "aggregate", 'c("SE.PRM.LHTH.DF")', "NA"), # Policy Lever (Learners) - Health
 
@@ -1121,8 +1121,8 @@ indicators <- list(
   #######################################
 
   c("SE.PRM.LFCP.1", "anti_poverty", "policy_survey", "NA", "NA"), # (De Jure) Are anti poverty interventions that focus on ECD publicly supported?
-  c("SE.PRM.LFCP.2", "-999", "policy_survey", "NA", "NA"), # (De Jure) Are cash transfers conditional on ECD services/enrollment publicly supported?
-  c("SE.PRM.LFCP.3", "-999", "policy_survey", "NA", "NA"), # (De Jure) Are cash transfers focused partially on ECD publicly supported?
+  c("SE.PRM.LFCP.2", "as.numeric(NA)", "policy_survey", "NA", "NA"), # (De Jure) Are cash transfers conditional on ECD services/enrollment publicly supported?
+  c("SE.PRM.LFCP.3", "as.numeric(NA)", "policy_survey", "NA", "NA"), # (De Jure) Are cash transfers focused partially on ECD publicly supported?
   c("SE.PRM.LFCP.4", "100*as.numeric(`Coverage of social protection programs (Best data source to be identified)`)", "learners", "NA", "NA"), # (De Facto) Coverage of social protection programs
 
   c("SE.PRM.LFCP.DF", "4*SE.PRM.LFCP.4/100 +1", "aggregate", 'c("SE.PRM.LFCP.4")', "NA"), # (De Facto) Policy Lever (Learners) - Caregiver Capacity - Financial Capacity
@@ -1140,7 +1140,7 @@ indicators <- list(
   c("SE.PRM.LSKC.3", "100*as.numeric(`Percentage of children under age 5 who have three or more children books`)", "learners", "NA", "NA"), # (De Facto) Percent of children under age 5 who have three or more children's books
   c("SE.PRM.LSKC.4", "100*as.numeric(`Percentage of children age 24-59 months engaged in four or more activities to provide early stimulation and responsive care in the last 3 days with any adult in the household`)", "learners", "NA", "NA"), # (De Facto) Percent of children age 24-59 months engaged in four or more activities to provide early stimulation and respo~
 
-  c("SE.PRM.LSKC.DF", "4*(SE.PRM.LSKC.3+SE.PRM.LSKC.4)/200+1", "aggregate", 'c("SE.PRM.LSKC.3","SE.PRM.LSKC.4")', "NA"), # (De Facto) Policy Lever (Learners) - Caregiver Capacity - Skills Capacity
+  c("SE.PRM.LSKC.DF", "4*rowMeans(across(c('SE.PRM.LSKC.3','SE.PRM.LSKC.4')),na.rm = TRUE)/100+1", "aggregate", 'c("SE.PRM.LSKC.3","SE.PRM.LSKC.4")', "NA"), # (De Facto) Policy Lever (Learners) - Caregiver Capacity - Skills Capacity
   c("SE.PRM.LSKC.DJ", "caregiver_skills", "policy_survey", "NA", "NA"),
   # (De Jure) Policy Lever (Learners) - Caregiver Capacity - Skills Capacity
   c("SE.PRM.LSKC", "SE.PRM.LSKC.DF", "aggregate", 'c("SE.PRM.LSKC.DF")', "NA"), # Policy Lever (Learners) - Caregiver Capacity - Skills Capacity
@@ -1285,7 +1285,7 @@ indicators <- list(
   c("SE.PRM.BFIN.6", "4*as.numeric(`Does the country spend 4-5%  of GDP or 15-20% of public expenditures on education spending?`)+1", "finance", "NA", "NA"), # (Financing) - Adequacy expressed by the per child spending
   c("SE.PRM.BFIN.3", "4*as.numeric(`Efficiency by the relationship between financing and outcomes; where 0 is the lowest possible efficiency and 1 is the highest`)+1", "finance", "NA", "NA"), # (Financing) Efficiency - Expressed by the score from the Public Expenditure and Financial Accountability (PEFA) assessment~
   c("SE.PRM.BFIN.4", "4*as.numeric(`Efficiency by the score from the Public Expenditure and Financial Accountability (PEFA) assessment; where 0 is the lowest possible efficiency and 1 is the highest`)+1", "finance", "NA", "NA"), # (Financing) Efficiency - Expressed by the relationship between financing and outcomes; where 0 is the lowest possible effi~
-  c("SE.PRM.BFIN.5", "-999", "finance", "NA", "NA"), # (Financing) - Equity
+  c("SE.PRM.BFIN.5", "as.numeric(NA)", "finance", "NA", "NA"), # (Financing) - Equity
   c("SE.PRM.BFIN.2", "as.numeric(`Government expenditure per school age person, primary (% of GDP per capita)`)", "finance", "NA", "NA"), # (Financing) - Adequacy expressed by the per child spending
 
   c("SE.PRM.BFIN", "as.numeric(0.5*SE.PRM.BFIN.2+0.5*(SE.PRM.BFIN.3+SE.PRM.BFIN.4)/2)", "aggregate", 'c("SE.PRM.BFIN.2", "SE.PRM.BFIN.3", "SE.PRM.BFIN.4")', "NA"), # Politics & Bureaucratic Capacity - Financing

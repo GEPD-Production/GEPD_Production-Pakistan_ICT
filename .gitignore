@@ -79,6 +79,7 @@
 !/**/*_rawdata/*.csv
 !/**/*_rawdata/*/*.csv
 
+!/**/04_GEPD_Indicators/*.csv
 
 
 
