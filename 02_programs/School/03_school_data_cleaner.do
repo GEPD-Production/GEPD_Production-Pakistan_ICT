@@ -1477,7 +1477,12 @@ frame change gdp_data
 
 *retreive parameters from run_GEPD.do
 *get data on gdp in local currency
-wbopendata, country($country)  indicator(NY.GDP.PCAP.CN) latest clear long
+
+* wbopendata, country($country)  indicator(NY.GDP.PCAP.CN) latest clear long
+
+wbopendata, country($country)  indicator(NY.GDP.PCAP.CN)  clear long  
+
+keep if year == 2022 // keeping the value for year 2022.
 
 *get latest value
 su ny_gdp_pcap_cn
